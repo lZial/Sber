@@ -91,6 +91,7 @@
             buttonTransfer.Text = "Перевести";
             buttonTransfer.UseVisualStyleBackColor = true;
             buttonTransfer.Click += buttonTransfer_Click;
+            buttonTransfer.KeyPress += buttonTransfer_KeyPress;
             // 
             // buttonHistory
             // 

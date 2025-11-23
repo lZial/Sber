@@ -15,6 +15,8 @@ namespace Finance
         {
             InitializeComponent();
 
+            this.AcceptButton = buttonTransfer;
+
             TextMoneyBalance.Text = $"{balance:C}";
         }
 
@@ -24,12 +26,12 @@ namespace Finance
         }
 
 
-        private void enterTransferSum_TextChanged(object sender, EventArgs SumChangedEvent)
+        private void enterTransferSum_TextChanged(object sender, EventArgs TransferSumChangedEvent)
         {
 
         }
 
-        private void buttonTransfer_Click(object sender, EventArgs TransferEvent)
+        private void buttonTransfer_Click(object sender, EventArgs TransferButtonClickEvent)
         {
             int.TryParse(enterCardNumber.Text, out CardNumber);
             decimal.TryParse(enterTrunsferSum.Text, out TransferSum);
@@ -76,7 +78,7 @@ namespace Finance
 
             if (TransferSum > balance * 0.7m)
             {
-                MessageBox.Show ($"Операция приостановлена по причине слишком большой суммы перевода, требуется дополнительное подтверждение.\nДля безопасности ваших средств мы остановили подозрительную операциию на сумму {TransferSum:C}.\nПожалуйства, позвоните на номер банка для дополнительного подтверждения операции.", "Предупреждение!",
+                MessageBox.Show($"Операция приостановлена, требуется дополнительное подтверждение.\nДля безопасности ваших средств мы остановили подозрительную операциию на сумму {TransferSum:C}.\nПожалуйства, позвоните на номер банка для дополнительного подтверждения операции.", "Предупреждение!",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -94,7 +96,7 @@ namespace Finance
 
         }
 
-        private void buttonHistory_Click(object sender, EventArgs HistoryClickEvent)
+        private void buttonHistory_Click(object sender, EventArgs HistoryButtonClickEvent)
         {
             HistoryForm newForm = new HistoryForm();
             newForm.Show();
@@ -114,14 +116,19 @@ namespace Finance
 
         private void EnterTransferSum_KeyPress(object sender, KeyPressEventArgs TransferSumKeyPressEvent)
         {
-            char number = TransferSumKeyPressEvent.KeyChar;
-            if (!Char.IsDigit(number) && number != 8)
+            char imput = TransferSumKeyPressEvent.KeyChar;
+            if (!Char.IsDigit(imput) && imput != 8)
             {
                 TransferSumKeyPressEvent.Handled = true;
             }
         }
 
         private void MoneyBalance_Click(object sender, EventArgs MoneyBalanceClickEvent)
+        {
+
+        }
+
+        private void buttonTransfer_KeyPress(object sender, KeyPressEventArgs TransferButtonKeyPressEvent)
         {
 
         }

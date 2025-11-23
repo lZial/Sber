@@ -56,6 +56,7 @@ namespace Finance
             {
                 MessageBox.Show("Некоректно введён номер карты или сумма перевода!", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                enterTrunsferSum.Focus();
                 return;
             }
 
@@ -71,8 +72,6 @@ namespace Finance
             {
                 MessageBox.Show("Недостаточно средств на счете!", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                enterCardNumber.Text = "";
-                enterTrunsferSum.Text = "";
                 return;
             }
 

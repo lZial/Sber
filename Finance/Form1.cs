@@ -34,6 +34,37 @@ namespace Finance
             int.TryParse(enterCardNumber.Text, out CardNumber);
             decimal.TryParse(enterTrunsferSum.Text, out TransferSum);
 
+            if (string.IsNullOrWhiteSpace(enterCardNumber.Text))
+            {
+                MessageBox.Show("Некоректно введён номер карты или сумма перевода!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                enterCardNumber.Focus();
+                return;
+            }
+
+            if (enterCardNumber.Text.Length != 5)
+            {
+                MessageBox.Show("Номер карты должен содержать 5 цифр!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                enterCardNumber.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(enterTrunsferSum.Text))
+            {
+                MessageBox.Show("Некоректно введён номер карты или сумма перевода!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (TransferSum == 0)
+            {
+                MessageBox.Show("Сумма перевода не может быть равна нулю!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                enterCardNumber.Focus();
+                return;
+            }
+
             if (TransferSum > balance)
             {
                 MessageBox.Show("Недостаточно средств на счете!", "Ошибка",
@@ -42,8 +73,15 @@ namespace Finance
                 enterTrunsferSum.Text = "";
                 return;
             }
-            balance -= TransferSum;
 
+            if (TransferSum > balance * 0.7m)
+            {
+                MessageBox.Show ($"Операция приостановлена по причине слишком большой суммы перевода, требуется дополнительное подтверждение.\nДля безопасности ваших средств мы остановили подозрительную операциию на сумму {TransferSum:C}.\nПожалуйства, позвоните на номер банка для дополнительного подтверждения операции.", "Предупреждение!",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            balance -= TransferSum;
             TextMoneyBalance.Text = $"{balance:C}";
 
             string operation = $"[{DateTime.Now:dd.MM.yyyy HH:mm}] Перевод на счет {CardNumber} на сумму {TransferSum:C}";
@@ -83,7 +121,7 @@ namespace Finance
             }
         }
 
-        private void MoneyBalance_Click(object sender, EventArgs e)
+        private void MoneyBalance_Click(object sender, EventArgs MoneyBalanceClickEvent)
         {
 
         }

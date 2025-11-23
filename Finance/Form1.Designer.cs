@@ -35,7 +35,7 @@
             buttonTransfer = new Button();
             buttonHistory = new Button();
             RemainingMoney = new Label();
-            MoneyBalance = new Label();
+            TextMoneyBalance = new Label();
             SuspendLayout();
             // 
             // enterTrunsferSum
@@ -113,23 +113,22 @@
             RemainingMoney.TabIndex = 6;
             RemainingMoney.Text = "У вас:";
             // 
-            // MoneyBalance
+            // TextMoneyBalance
             // 
-            MoneyBalance.AutoSize = true;
-            MoneyBalance.Font = new Font("Segoe UI", 10F);
-            MoneyBalance.Location = new Point(80, 9);
-            MoneyBalance.Name = "MoneyBalance";
-            MoneyBalance.Size = new Size(23, 28);
-            MoneyBalance.TabIndex = 7;
-            MoneyBalance.Text = "1";
-            MoneyBalance.Click += MoneyBalance_Click;
+            TextMoneyBalance.AutoSize = true;
+            TextMoneyBalance.Font = new Font("Segoe UI", 10F);
+            TextMoneyBalance.Location = new Point(80, 9);
+            TextMoneyBalance.Name = "TextMoneyBalance";
+            TextMoneyBalance.Size = new Size(0, 28);
+            TextMoneyBalance.TabIndex = 7;
+            TextMoneyBalance.Click += MoneyBalance_Click;
             // 
             // Bank
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(378, 444);
-            Controls.Add(MoneyBalance);
+            Controls.Add(TextMoneyBalance);
             Controls.Add(RemainingMoney);
             Controls.Add(buttonHistory);
             Controls.Add(buttonTransfer);
@@ -152,6 +151,6 @@
         public TextBox enterCardNumber;
         public TextBox enterTrunsferSum;
         private Label RemainingMoney;
-        private Label MoneyBalance;
+        private Label TextMoneyBalance;
     }
 }

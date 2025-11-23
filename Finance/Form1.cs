@@ -9,10 +9,13 @@ namespace Finance
 
         private int CardNumber;
         private decimal TransferSum;
+        private decimal balance = 500000;
 
         public Bank()
         {
             InitializeComponent();
+
+            TextMoneyBalance.Text = $"{balance:C}";
         }
 
         private void enterCardNumber_TextChanged(object sender, EventArgs CardNumberChangedEvent)
@@ -30,6 +33,18 @@ namespace Finance
         {
             int.TryParse(enterCardNumber.Text, out CardNumber);
             decimal.TryParse(enterTrunsferSum.Text, out TransferSum);
+
+            if (TransferSum > balance)
+            {
+                MessageBox.Show("Недостаточно средств на счете!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                enterCardNumber.Text = "";
+                enterTrunsferSum.Text = "";
+                return;
+            }
+            balance -= TransferSum;
+
+            TextMoneyBalance.Text = $"{balance:C}";
 
             string operation = $"[{DateTime.Now:dd.MM.yyyy HH:mm}] Перевод на счет {CardNumber} на сумму {TransferSum:C}";
             history.Enqueue(operation);

@@ -269,8 +269,6 @@ namespace Finance
 
             if (rating >= 3)
             {
-                reasons.Add("высокий совокупный риск операции");
-
                 TimeSpan currentTimeOfDay = DateTime.Now.TimeOfDay;
                 double hoursDifference = Math.Abs((currentTimeOfDay - averageTransactionTime).TotalHours);
                 if (hoursDifference > 12) hoursDifference = 24 - hoursDifference;

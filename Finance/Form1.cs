@@ -64,16 +64,6 @@ namespace Finance
             }
 
             CalculateAverages();
-
-            Console.WriteLine("=== ТЕСТОВЫЕ ДАННЫЕ ===");
-            Console.WriteLine($"Средняя сумма: {averageTransactionAmount:C}");
-            Console.WriteLine($"Среднее время: {averageTransactionTime:hh\\:mm}");
-            Console.WriteLine("Статистика по получателям:");
-            foreach (var recipient in recipientTransferCount)
-            {
-                Console.WriteLine($"  Счет {recipient.Key}: {recipient.Value} переводов");
-            }
-            Console.WriteLine("======================\n");
         }
 
         private void CalculateAverages()
@@ -132,7 +122,6 @@ namespace Finance
             if (hoursDifference >= 4)
             {
                 rating += 1;
-                Console.WriteLine($"Отклонение времени на {hoursDifference:F1} часов (+1 балл)");
             }
 
             if (averageTransactionAmount > 0)
@@ -142,47 +131,24 @@ namespace Finance
                 if (amountRatio >= 3.0m)
                 {
                     rating += 2;
-                    Console.WriteLine($"Сумма в {amountRatio:F1} раз больше средней (+2 балла)");
                 }
                 else if (amountRatio >= 2.0m)
                 {
                     rating += 1;
-                    Console.WriteLine($"Сумма в {amountRatio:F1} раз больше средней (+1 балл)");
                 }
             }
 
             if (recipientTransferCount.ContainsKey(recipient))
             {
-                if (recipientTransferCount[recipient] < 3)
+                if (recipientTransferCount[recipient] < 4)
                 {
                     rating += 1;
-                    Console.WriteLine($"Перевод на номер с {recipientTransferCount[recipient]} предыдущими переводами (+1 балл)");
-                }
-                else
-                {
-                    Console.WriteLine($"Перевод на часто используемый номер (более 3 переводов)");
                 }
             }
             else
             {
                 rating += 1;
-                Console.WriteLine($"Перевод на совершенно новый номер (+1 балл)");
             }
-
-            Console.WriteLine($"\n=== ИТОГ АНАЛИЗА ===");
-            Console.WriteLine($"Получатель: {recipient}");
-
-            if (recipientTransferCount.ContainsKey(recipient))
-            {
-                Console.WriteLine($"Ранее переводов на этот номер: {recipientTransferCount[recipient]}");
-            }
-            else
-            {
-                Console.WriteLine($"Ранее переводов на этот номер: 0 (новый номер)");
-            }
-
-            Console.WriteLine($"Общий рейтинг подозрительности: {rating} баллов");
-            Console.WriteLine($"===================\n");
 
             return rating;
         }

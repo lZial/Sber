@@ -37,12 +37,14 @@ namespace Finance
 
             var testTransactions = new List<Transaction>
             {
-                new Transaction { Amount = 600, Time = new DateTime(today.Year, today.Month, today.Day, 9, 15, 0) },
-                new Transaction { Amount = 1000, Time = new DateTime(today.Year, today.Month, today.Day, 10, 30, 0)  },
-                new Transaction { Amount = 8000, Time = new DateTime(today.Year, today.Month, today.Day, 12, 45, 0) },
-                new Transaction { Amount = 1000, Time = new DateTime(today.Year, today.Month, today.Day, 13, 30, 0) },
-                new Transaction { Amount = 10000, Time = new DateTime(today.Year, today.Month, today.Day, 17, 50, 0) },
-                new Transaction { Amount = 6000, Time = new DateTime(today.Year, today.Month, today.Day, 21, 30, 0), Recipient = "98765" },
+                new Transaction { Amount = 600, Time = new DateTime(today.Year, today.Month, today.Day, 9, 15, 0), Recipient = "12932" },
+                new Transaction { Amount = 1000, Time = new DateTime(today.Year, today.Month, today.Day, 10, 30, 0), Recipient = "54734"},
+                new Transaction { Amount = 8000, Time = new DateTime(today.Year, today.Month, today.Day, 12, 45, 0), Recipient = "39478" },
+                new Transaction { Amount = 1000, Time = new DateTime(today.Year, today.Month, today.Day, 13, 30, 0), Recipient = "20349" },
+                new Transaction { Amount = 10000, Time = new DateTime(today.Year, today.Month, today.Day, 17, 50, 0), Recipient = "39478" },
+                new Transaction { Amount = 6000, Time = new DateTime(today.Year, today.Month, today.Day, 21, 30, 0), Recipient = "78765" },
+                new Transaction { Amount = 5000, Time = new DateTime(today.Year, today.Month, today.Day, 22, 40, 0), Recipient = "39478" },
+                new Transaction { Amount = 3000, Time = new DateTime(today.Year, today.Month, today.Day, 23, 00, 0), Recipient = "39478" },
             };
 
 

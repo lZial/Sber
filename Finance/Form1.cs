@@ -121,7 +121,7 @@ namespace Finance
                 hoursDifference = 24 - hoursDifference;
             }
 
-            if (hoursDifference >= 4)
+            if (hoursDifference >= 5)
             {
                 rating += 1;
             }
@@ -210,11 +210,15 @@ namespace Finance
                 return;
             }
 
-            if (TransferSum > balance * 0.7m)
+            if (balance >= 50000)
             {
-                MessageBox.Show($"Операция приостановлена, требуется дополнительное подтверждение.\nДля безопасности ваших средств мы остановили подозрительную операциию на сумму {TransferSum:C}.\nПожалуйста, позвоните на номер банка для дополнительного подтверждения операции.", "Предупреждение!",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                if (TransferSum > balance * 0.7m)
+                {
+                    MessageBox.Show($"Операция приостановлена, требуется дополнительное подтверждение.\nДля безопасности ваших средств мы остановили подозрительную операциию на сумму {TransferSum:C}.\nПожалуйста, позвоните на номер банка для дополнительного подтверждения операции.", "Предупреждение!",
+                    //rating += 1 (мб добавить)
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
 
             DateTime currentTime = DateTime.Now;
@@ -273,9 +277,9 @@ namespace Finance
                 double hoursDifference = Math.Abs((currentTimeOfDay - averageTransactionTime).TotalHours);
                 if (hoursDifference > 12) hoursDifference = 24 - hoursDifference;
 
-                if (hoursDifference >= 6)
+                if (hoursDifference >= 5)
                 {
-                    reasons.Add("\nзначительное отклонение от обычного времени операций");
+                    reasons.Add("\nзначительное отклонение от стандартного времени операций");
                 }
 
                 if (averageTransactionAmount > 0 && TransferSum >= averageTransactionAmount * 3)
@@ -287,7 +291,7 @@ namespace Finance
                     reasons.Add("\nсумма превышает стандартную");
                 }
 
-                if (!recipientTransferCount.ContainsKey(recipient) || recipientTransferCount[recipient] < 3)
+                if (!recipientTransferCount.ContainsKey(recipient) || recipientTransferCount[recipient] < 4)
                 {
                     reasons.Add("\nперевод на новый или редко используемый номер");
                 }
